@@ -1,0 +1,200 @@
+site:
+  title: "Sorg Neighborhood Bird Sensor"
+  subtitle: "Acoustic monitoring record — 2025-03-01 to 2026-03-23"
+  location: "Central Michigan (42.6499°N, 84.2935°W)"
+  footer: "Data: BirdNET acoustic detections · Location: 42.6499°N, 84.2935°W"
+
+# March 2026 digest narrative — shown at the very top of the page
+digest:
+  march_2026: >
+    Spring migration is kicking off in earnest. American Crows are still dominating
+    the airwaves from their winter roost, but the first wave of returning species is
+    unmistakable — robins and red-winged blackbirds are back, and the woodpeckers
+    are drumming louder every morning. March 2026 is shaping up to be a strong
+    migration month compared to the same period last year.
+
+categories:
+
+  birds_of_prey:
+    id: birds-of-prey
+    name: Birds of Prey
+    icon: "🦅"
+    color: "#e74c3c"
+    bg: "linear-gradient(135deg,#fadbd8 0%,#fff 100%)"
+    narrative: >
+      Seven raptor species were detected across the monitoring period, with the
+      Red-tailed Hawk dominating detections as expected for a year-round resident
+      of open Michigan farmland. Cooper's Hawk and Merlin showed clear spring and
+      fall spikes corresponding to their migration windows, while Bald Eagle and
+      Osprey detections clustered around early spring as these fish-hunters return
+      to the region. American Kestrel, once a common Michigan farmland bird,
+      appeared only sparingly — consistent with their documented long-term
+      population decline in the Midwest. The relatively low overall count (244)
+      reflects both the naturally lower density of apex predators and the fact
+      that acoustic detection of raptors is inherently harder than for vocal
+      songbirds.
+
+  owls:
+    id: owls
+    name: Owls
+    icon: "🦉"
+    color: "#8e44ad"
+    bg: "linear-gradient(135deg,#e8daef 0%,#fff 100%)"
+    narrative: >
+      Only two owl species registered in the dataset — Barred Owl and Great
+      Horned Owl — both year-round Michigan residents. All 596 detections fell
+      within 2025, with a notable absence in 2026, suggesting the sensor may
+      not have been running overnight by early 2026 or that detection conditions
+      changed seasonally. Great Horned Owls are among the earliest nesters in
+      North America, often calling from January onward, and any winter detections
+      here would be especially noteworthy. Barred Owls are increasingly common
+      in suburban woodland edges and their characteristic "who cooks for you"
+      call is reliably picked up by acoustic monitors at night.
+
+  woodpeckers:
+    id: woodpeckers
+    name: Woodpeckers
+    icon: "🐦"
+    color: "#e67e22"
+    bg: "linear-gradient(135deg,#fdebd0 0%,#fff 100%)"
+    narrative: >
+      With over 12,600 detections across seven species, woodpeckers were one of
+      the most consistently present groups throughout the year. Red-bellied
+      Woodpecker led the count, followed closely by Downy Woodpecker — both
+      year-round fixtures at feeding stations and in forest edges. Northern
+      Flicker showed strong spring activity as migrants and local breeders become
+      vocal. Yellow-bellied Sapsucker appears seasonally, drilling neat rows of
+      sap wells in birches and maples during migration. Pileated Woodpecker, the
+      largest North American woodpecker and the inspiration for Woody Woodpecker,
+      contributed a small but exciting set of detections. Red-headed Woodpecker,
+      a species of conservation concern in Michigan due to habitat loss, registered
+      a handful of detections — each one worth noting.
+
+  ducks:
+    id: ducks
+    name: Ducks
+    icon: "🦆"
+    color: "#2980b9"
+    bg: "linear-gradient(135deg,#d6eaf8 0%,#fff 100%)"
+    narrative: >
+      Ten duck species were recorded across the monitoring period, with Mallard
+      and Wood Duck dominating as the most abundant and year-round familiar faces.
+      The strong March and April peaks align with spring migration, when puddle
+      ducks move through central Michigan in large numbers. Blue-winged Teal is
+      one of the earliest departing fall migrants among dabbling ducks, explaining
+      its late-summer presence. Ring-necked Duck and Common Goldeneye are diving
+      ducks that favor deeper water; their detections likely reflect brief flyovers
+      or nearby wetland use. Long-tailed Duck is an uncommon inland detection,
+      likely a migrant pushing through during a weather event. The strong 2025
+      counts versus limited 2026 data reflect the partial year of 2026 monitoring.
+
+  waterfowl:
+    id: waterfowl-geese-swans
+    name: "Waterfowl (Geese & Swans)"
+    icon: "🪿"
+    color: "#27ae60"
+    bg: "linear-gradient(135deg,#d5f5e3 0%,#fff 100%)"
+    narrative: >
+      Canada Goose dominated this group as expected — a year-round resident that
+      has become ubiquitous across Michigan's parks, golf courses, and wetlands.
+      The spring and fall migration pulses are clearly visible in the monthly data,
+      when noisy V-formations are a daily sight and sound overhead. Snow Goose
+      detections are a treat, typically occurring during spring migration as flocks
+      push north — occasionally in the thousands. Trumpeter Swan, once extirpated
+      from Michigan and now successfully reintroduced, and Tundra Swan, a true
+      migrant passing through in spring and fall, both contributed detections.
+      Greater White-fronted Goose rounds out the group as an occasional migrant
+      through the Great Lakes region.
+
+  songbirds:
+    id: songbirds-passerines
+    name: "Songbirds & Passerines"
+    icon: "🐦‍⬛"
+    color: "#f39c12"
+    bg: "linear-gradient(135deg,#fef9e7 0%,#fff 100%)"
+    narrative: >
+      The backbone of the dataset with over 110,000 detections across 87 species,
+      this group spans everything from wintering finches to neotropical warblers.
+      House Finch was the single most detected species in the entire database —
+      a testament to their year-round feeder presence and loud, burbling song.
+      Eastern Wood-Pewee's massive count of 17,450 is striking and suggests a
+      breeding territory very close to the sensor, as this flycatcher sings
+      persistently from a fixed perch all summer. The warbler diversity in May
+      is spectacular, with Cape May, Magnolia, Blackburnian, and Blackpoll all
+      moving through in a matter of weeks. Dark-eyed Junco and White-throated
+      Sparrow bookend the year as winter visitors, arriving in October and
+      departing in April. Species diversity peaks sharply in May during peak
+      migration and again in late summer as resident breeders are still active.
+
+  shorebirds:
+    id: shorebirds-waders
+    name: "Shorebirds & Waders"
+    icon: "🦢"
+    color: "#16a085"
+    bg: "linear-gradient(135deg,#d1f2eb 0%,#fff 100%)"
+    narrative: >
+      Nine species of shorebirds and wading birds were detected, led by Great
+      Blue Heron — a common year-round presence along waterways. Killdeer is an
+      early spring returnee, often detected on bare ground and agricultural fields
+      before most migrants arrive. Greater Yellowlegs passes through in both
+      spring and fall, often calling loudly in flight. American Woodcock is an
+      early spring migrant whose "peent" display calls make it particularly
+      detectable acoustically at dusk. Sandhill Crane has rebounded impressively
+      in Michigan over the past few decades; their loud, rattling calls carry
+      great distances and are reliably captured. Caspian Tern and Herring Gull
+      reflect proximity to open water or the Great Lakes corridor, and Ring-billed
+      Gull is a year-round fixture in urban Michigan.
+
+  hummingbirds:
+    id: hummingbirds
+    name: Hummingbirds
+    icon: "🪶"
+    color: "#c0392b"
+    bg: "linear-gradient(135deg,#fdedec 0%,#fff 100%)"
+    narrative: >
+      Just six Ruby-throated Hummingbird detections were recorded, all in 2025.
+      This is the only hummingbird species that breeds in eastern North America,
+      and it typically arrives in Michigan in mid-May, departing by early October.
+      The low detection count likely reflects both the sensor's placement and
+      acoustic detection limits — hummingbirds are more reliably detected visually
+      than by sound, as their vocalizations are quiet and high-pitched. Any
+      detection is a confirmation of their presence in the area, and the timing
+      of these six records would be worth examining closely against the known
+      May–September window.
+
+  corvids:
+    id: corvids
+    name: Corvids
+    icon: "🐦"
+    color: "#2c3e50"
+    bg: "linear-gradient(135deg,#eaecee 0%,#fff 100%)"
+    narrative: >
+      American Crow accounts for all corvid detections — 4,974 in total — making
+      it one of the most detected species overall. Crows are highly vocal, socially
+      complex, and present year-round, which explains their strong showing. What's
+      notable is the dramatic year-over-year shift: 1,743 detections in 2025 but
+      3,231 in just the first three months of 2026 alone, suggesting either a
+      significant increase in local crow activity, a change in sensor conditions,
+      or the emergence of a roost nearby. Large winter crow roosts are common in
+      Michigan cities and towns, sometimes numbering in the tens of thousands.
+      The January–March 2026 spike deserves further investigation. Blue Jay was
+      categorized under songbirds given its behavioral overlap with passerines at
+      feeders, despite its taxonomic corvid family membership.
+
+  introduced:
+    id: introduced-invasive
+    name: "Introduced & Invasive"
+    icon: "⚠️"
+    color: "#7f8c8d"
+    bg: "linear-gradient(135deg,#eaeded 0%,#fff 100%)"
+    narrative: >
+      European Starling and House Sparrow, both Old World introductions now firmly
+      embedded in North American urban and agricultural ecosystems, make up this
+      group. The near-complete absence in 2025 (only 8 detections) versus 947 in
+      early 2026 is striking and almost certainly reflects a change in sensor
+      configuration, placement, or detection thresholds rather than a genuine
+      population change — starlings and sparrows are omnipresent in Michigan.
+      Both species are prolific breeders and cavity competitors that have displaced
+      many native cavity-nesting species, making their monitoring ecologically
+      relevant. The sensor data, once normalized, could provide useful baseline
+      information about their seasonal activity patterns.
