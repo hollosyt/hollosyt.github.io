@@ -238,5 +238,29 @@
   "Osprey": {
     "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Osprey_Perched_Snag_Heislerville.jpg/330px-Osprey_Perched_Snag_Heislerville.jpg",
     "full": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Osprey_Perched_Snag_Heislerville.jpg"
+  },
+  "American Coot": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/American_coot_in_Prospect_Park_%2806152%29.jpg/330px-American_coot_in_Prospect_Park_%2806152%29.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/American_coot_in_Prospect_Park_%2806152%29.jpg/3840px-American_coot_in_Prospect_Park_%2806152%29.jpg"
+  },
+  "Wilson's Snipe": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Gallinago-delicata-002-cropped.jpg/330px-Gallinago-delicata-002-cropped.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Gallinago-delicata-002-cropped.jpg"
+  },
+  "Common Merganser": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Mergus_merganser_merganser_2078_%285561922560%29.jpg/330px-Mergus_merganser_merganser_2078_%285561922560%29.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Mergus_merganser_merganser_2078_%285561922560%29.jpg/3840px-Mergus_merganser_merganser_2078_%285561922560%29.jpg"
+  },
+  "American Wigeon": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/American_Wigeon_Male.jpg/330px-American_Wigeon_Male.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/American_Wigeon_Male.jpg/3840px-American_Wigeon_Male.jpg"
+  },
+  "Golden-crowned Kinglet": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Golden-Crowned_Kinglet_EBFNWR.jpg/330px-Golden-Crowned_Kinglet_EBFNWR.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Golden-Crowned_Kinglet_EBFNWR.jpg"
+  },
+  "Brown-headed Cowbird": {
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Brown-headed_cowbird_male_%2871126%29.jpg/330px-Brown-headed_cowbird_male_%2871126%29.jpg",
+    "full": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Brown-headed_cowbird_male_%2871126%29.jpg/3840px-Brown-headed_cowbird_male_%2871126%29.jpg"
   }
 }

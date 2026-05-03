@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spring Timing · Apr 2025 vs 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117;--card:#161b22;--card2:#1c2128;
+  --text:#e6edf3;--mut:#8b949e;--bdr:#30363d;--r:12px;
+  --c25:#58a6ff;--c26:#3fb950;--later:#f0883e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI',system-ui,sans-serif;
+     background:var(--bg);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:#010409;
+     display:flex;align-items:center;gap:2px;padding:0 16px;
+     overflow-x:auto;white-space:nowrap;scrollbar-width:none;
+     box-shadow:0 1px 0 var(--bdr)}
+.nav::-webkit-scrollbar{display:none}
+.nav-brand{color:var(--text);font-weight:700;font-size:.9rem;
+           padding:0 12px 0 0;border-right:1px solid var(--bdr);
+           margin-right:6px;flex-shrink:0;height:48px;
+           display:flex;align-items:center}
+.nl{color:var(--mut);font-size:.8rem;padding:0 9px;
+     border-bottom:3px solid transparent;
+     transition:color .2s,border-color .2s;
+     flex-shrink:0;height:48px;display:flex;align-items:center}
+.nl:hover{color:var(--text);border-bottom-color:var(--c25)}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#0d1117 0%,#0d1f33 50%,#0f3460 100%);
+      padding:52px 20px 44px;text-align:center;border-bottom:1px solid var(--bdr)}
+.hero h1{font-size:clamp(1.6rem,5vw,2.8rem);font-weight:800;letter-spacing:-1px;margin-bottom:6px}
+.hero .sub{font-size:clamp(.85rem,3vw,1.05rem);color:#7da7d4;margin-bottom:28px}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:12px;padding:12px 22px;min-width:100px;
+      backdrop-filter:blur(8px);text-align:center}
+.stat .v{font-size:clamp(1.2rem,4vw,1.9rem);font-weight:800;display:block}
+.stat .l{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--mut)}
+.c25 .v{color:var(--c25)} .c26 .v{color:var(--c26)}
+.up .v{color:#3fb950}    .dn .v{color:#f85149}
+.neu .v{color:var(--mut)}
+
+/* layout */
+.main{max-width:1200px;margin:0 auto;padding:32px 16px 64px}
+.sec{margin-bottom:56px}
+.sec-hd{margin-bottom:18px}
+.sec-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:800;margin-bottom:4px}
+.sec-sub{font-size:.85rem;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:20px}
+
+/* legend */
+.legend{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.ld{display:flex;align-items:center;gap:5px;font-size:.8rem;color:var(--mut)}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* peak chart */
+.peak-wrap{background:var(--card);border:1px solid var(--bdr);
+           border-radius:var(--r);padding:22px 20px}
+.peak-inner{position:relative;height:882px}
+
+/* curve grid */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.cg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cg{grid-template-columns:1fr}}
+.cc{background:var(--card);border:1px solid var(--bdr);
+    border-radius:var(--r);padding:14px 16px}
+.cc-name{font-weight:700;font-size:.92rem;margin-bottom:6px}
+.cc-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;align-items:center}
+.cc-wrap{position:relative;height:120px}
+
+/* badges */
+.badge{display:inline-flex;align-items:center;padding:2px 8px;
+       border-radius:20px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.b-25{background:rgba(88,166,255,.15);color:var(--c25);border:1px solid rgba(88,166,255,.3)}
+.b-26{background:rgba(63,185,80,.15);color:var(--c26);border:1px solid rgba(63,185,80,.3)}
+.b-later{background:rgba(240,136,62,.15);color:var(--later);border:1px solid rgba(240,136,62,.3)}
+.b-earlier{background:rgba(63,185,80,.15);color:#3fb950;border:1px solid rgba(63,185,80,.3)}
+.b-neu{background:rgba(139,148,158,.12);color:var(--mut);border:1px solid rgba(139,148,158,.25)}
+
+/* arrival table */
+.arr-t{width:100%;border-collapse:collapse;font-size:.88rem}
+.arr-t th{padding:8px 12px;text-align:left;color:var(--mut);font-weight:500;
+          font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;
+          border-bottom:1px solid var(--bdr)}
+.arr-t td{padding:8px 12px;border-bottom:1px solid rgba(48,54,61,.5)}
+.arr-t tr:last-child td{border-bottom:none}
+.arr-t tr:hover td{background:rgba(255,255,255,.025)}
+.mut{color:var(--mut)}
+.pill{display:inline-block;padding:1px 9px;border-radius:12px;font-size:.77rem;font-weight:700}
+.pill-e{background:rgba(63,185,80,.15);color:#3fb950}
+.pill-l{background:rgba(240,136,62,.15);color:var(--later)}
+.pill-n{background:rgba(139,148,158,.12);color:var(--mut)}
+
+/* presence */
+.pres-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:600px){.pres-grid{grid-template-columns:1fr}}
+.pc-title{font-weight:700;font-size:.92rem;padding-bottom:10px;
+          margin-bottom:12px;border-bottom:1px solid var(--bdr);
+          display:flex;align-items:center;gap:6px}
+.pc-count{margin-left:auto;font-weight:400;font-size:.78rem;color:var(--mut)}
+.pr{display:flex;justify-content:space-between;align-items:center;
+    padding:5px 0;border-bottom:1px solid rgba(48,54,61,.35);font-size:.87rem}
+.pr:last-child{border-bottom:none}
+.pr-n{font-size:.78rem;color:var(--mut);font-weight:500}
+
+/* note */
+.note{font-size:.78rem;color:var(--mut);margin-top:14px;padding:10px 14px;
+      background:rgba(255,255,255,.03);border-radius:8px;
+      border-left:3px solid var(--bdr)}
+
+/* syst box */
+.syst{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.syst-pill{background:var(--card2);border:1px solid var(--bdr);
+           border-radius:8px;padding:10px 16px;font-size:.85rem}
+.syst-pill b{color:var(--text)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">🐦 Spring Timing</div>
+  <a class="nl" href="#timing">Peak Shifts</a>
+  <a class="nl" href="#curves">Daily Curves</a>
+  <a class="nl" href="#arrivals">Arrivals</a>
+  <a class="nl" href="#presence">Presence</a>
+</nav>
+
+<header class="hero">
+  <h1>Spring Migration Timing</h1>
+  <p class="sub">April 2025 vs April 2026 · Sorg Neighborhood Bird Sensor</p>
+  <div class="stats">
+    <div class="stat c25">
+      <span class="v">20,101</span>
+      <span class="l">Apr 2025 detections</span>
+    </div>
+    <div class="stat c26">
+      <span class="v">26,889</span>
+      <span class="l">Apr 2026 detections</span>
+    </div>
+    <div class="stat up">
+      <span class="v">▲ 34%</span>
+      <span class="l">Year over year</span>
+    </div>
+    <div class="stat">
+      <span class="v" style="color:var(--text)">23</span>
+      <span class="l">Species analyzed</span>
+    </div>
+    <div class="stat dn">
+      <span class="v">+0.7d</span>
+      <span class="l">Mean timing shift</span>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ═══ SECTION 1: PEAK TIMING SHIFTS ══════════════════════════════════════ -->
+<section class="sec" id="timing">
+  <div class="sec-hd">
+    <div class="sec-title">Peak Activity Timing Shifts</div>
+    <div class="sec-sub">Peak detection day within April for 23 species with ≥50 detections each year.
+      <span style="color:#3fb950">Green = peaked earlier in 2026</span> ·
+      <span style="color:var(--later)">Orange = peaked later in 2026</span>.</div>
+  </div>
+  <div class="peak-wrap">
+    <div class="legend">
+      <div class="ld"><div class="dot" style="background:#3fb950"></div>Earlier in 2026</div>
+      <div class="ld"><div class="dot" style="background:var(--later)"></div>Later in 2026</div>
+    </div>
+    <div class="peak-inner"><canvas id="peak-chart"></canvas></div>
+  </div>
+  <div class="syst">
+    <div class="syst-pill">Mean shift <b>+0.69d</b></div>
+    <div class="syst-pill">Median <b>+1.52d</b></div>
+    <div class="syst-pill">Std dev <b>5.21d</b></div>
+    <div class="syst-pill"><b style="color:#3fb950">8</b> species earlier</div>
+    <div class="syst-pill"><b style="color:var(--later)">13</b> species later</div>
+    <div class="syst-pill"><b>2</b> stable (±1d)</div>
+  </div>
+  <p class="note">Peak day = single day with the highest detection count within April.
+    Hover bars for details. The weighted mean shift (shown on curve cards) is more robust.
+    Sorted earliest → latest peak shift in 2026.</p>
+</section>
+
+<!-- ═══ SECTION 2: DAILY CURVES ════════════════════════════════════════════ -->
+<section class="sec" id="curves">
+  <div class="sec-hd">
+    <div class="sec-title">Daily Detection Curves</div>
+    <div class="sec-sub">Day-by-day April detections for the 15 most-recorded species.
+      Badge shows weighted mean day shift — the center-of-mass timing change.</div>
+  </div>
+  <div class="legend">
+    <div class="ld"><div class="dot" style="background:var(--c25)"></div>2025</div>
+    <div class="ld"><div class="dot" style="background:var(--c26)"></div>2026</div>
+  </div>
+  <div class="cg">
+    
+  <div class="cc">
+    <div class="cc-name">House Finch</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 5,482</span>
+      <span class="badge b-26">2026: 9,717</span>
+      <span class="badge b-later">▼ 1.5d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc0"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Canada Goose</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 1,132</span>
+      <span class="badge b-26">2026: 8,047</span>
+      <span class="badge b-later">▼ 3.7d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc1"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Mallard</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 1,633</span>
+      <span class="badge b-26">2026: 823</span>
+      <span class="badge b-later">▼ 7.5d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc2"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">American Robin</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 1,379</span>
+      <span class="badge b-26">2026: 695</span>
+      <span class="badge b-later">▼ 3.3d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc3"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Northern Cardinal</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 1,122</span>
+      <span class="badge b-26">2026: 509</span>
+      <span class="badge b-later">▼ 3.7d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc4"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Mourning Dove</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 805</span>
+      <span class="badge b-26">2026: 792</span>
+      <span class="badge b-later">▼ 1.1d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc5"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Tufted Titmouse</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 1,077</span>
+      <span class="badge b-26">2026: 264</span>
+      <span class="badge b-earlier">▲ 0.9d earlier</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc6"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Brown-headed Cowbird</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 527</span>
+      <span class="badge b-26">2026: 665</span>
+      <span class="badge b-later">▼ 1.6d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc7"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Wood Duck</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 668</span>
+      <span class="badge b-26">2026: 415</span>
+      <span class="badge b-later">▼ 2.1d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc8"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Black-capped Chickadee</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 586</span>
+      <span class="badge b-26">2026: 376</span>
+      <span class="badge b-later">▼ 2.5d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc9"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">American Goldfinch</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 317</span>
+      <span class="badge b-26">2026: 545</span>
+      <span class="badge b-later">▼ 4.3d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc10"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Golden-crowned Kinglet</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 662</span>
+      <span class="badge b-26">2026: 195</span>
+      <span class="badge b-earlier">▲ 2.8d earlier</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc11"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Northern Flicker</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 500</span>
+      <span class="badge b-26">2026: 335</span>
+      <span class="badge b-later">▼ 6.0d later</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc12"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">White-breasted Nuthatch</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 714</span>
+      <span class="badge b-26">2026: 115</span>
+      <span class="badge b-earlier">▲ 5.2d earlier</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc13"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="cc-name">Tree Swallow</div>
+    <div class="cc-meta">
+      <span class="badge b-25">2025: 523</span>
+      <span class="badge b-26">2026: 204</span>
+      <span class="badge b-earlier">▲ 3.3d earlier</span>
+    </div>
+    <div class="cc-wrap"><canvas id="cc14"></canvas></div>
+  </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: FIRST ARRIVAL DATES ════════════════════════════════════ -->
+<section class="sec" id="arrivals">
+  <div class="sec-hd">
+    <div class="sec-title">First April Detection Dates</div>
+    <div class="sec-sub">Species where the first April detection shifted by ≥3 days.
+      March 2026 sensor outage (Mar 12–22) makes pre-April 2026 arrivals unreliable.</div>
+  </div>
+  <div class="card">
+    <table class="arr-t">
+      <thead>
+        <tr>
+          <th>Species</th><th>First · Apr 2025</th><th>First · Apr 2026</th>
+          <th>Arrival shift</th><th>Wtd mean shift</th><th>Det. 25 / 26</th>
+        </tr>
+      </thead>
+      <tbody><tr><td>Pileated Woodpecker</td><td>Apr 1</td><td>Apr 5</td><td><span class="pill pill-l">+4d later</span></td><td class='mut'>+14.2d</td><td class='mut'>80 / 58</td></tr></tbody>
+    </table>
+  </div>
+  <p class="note">All comparisons restricted to April 1–30. A positive shift means first detection
+    was later in 2026; negative means earlier. Species with fewer than 10 April detections excluded.</p>
+</section>
+
+<!-- ═══ SECTION 4: PRESENCE CHANGES ═══════════════════════════════════════ -->
+<section class="sec" id="presence">
+  <div class="sec-hd">
+    <div class="sec-title">Species Presence Changes</div>
+    <div class="sec-sub">Species with ≥10 detections in one April but fewer than 10 in the other.</div>
+  </div>
+  <div class="pres-grid">
+    <div class="card">
+      <div class="pc-title">
+        <span style="color:var(--c25)">●</span> Only in April 2025
+        <span class="pc-count">7 species</span>
+      </div>
+      <div class="pr"><span>Ruby-crowned Kinglet</span><span class="pr-n">273</span></div><div class="pr"><span>Northern Waterthrush</span><span class="pr-n">69</span></div><div class="pr"><span>Purple Finch</span><span class="pr-n">47</span></div><div class="pr"><span>Palm Warbler</span><span class="pr-n">40</span></div><div class="pr"><span>American Black Duck</span><span class="pr-n">19</span></div><div class="pr"><span>Barn Swallow</span><span class="pr-n">19</span></div><div class="pr"><span>Rose-breasted Grosbeak</span><span class="pr-n">15</span></div>
+    </div>
+    <div class="card">
+      <div class="pc-title">
+        <span style="color:var(--c26)">●</span> Only in April 2026
+        <span class="pc-count">6 species</span>
+      </div>
+      <div class="pr"><span>House Sparrow</span><span class="pr-n">372</span></div><div class="pr"><span>Eastern Bluebird</span><span class="pr-n">92</span></div><div class="pr"><span>Carolina Wren</span><span class="pr-n">39</span></div><div class="pr"><span>White-throated Sparrow</span><span class="pr-n">15</span></div><div class="pr"><span>Common Raven</span><span class="pr-n">15</span></div><div class="pr"><span>Pine Siskin</span><span class="pr-n">13</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="text-align:center;padding:24px 16px;font-size:.77rem;color:var(--mut);
+               border-top:1px solid var(--bdr)">
+  Sorg Neighborhood Bird Sensor · Spring Timing Analysis · April 2025 vs April 2026<br>
+  March 2026 sensor outage (Mar 12–22) noted — April comparisons only.
+</footer>
+
+<script>
+const PEAK_DATA = [{"name":"Blue Jay","n25":178,"n26":382,"peak25":30,"peak26":1,"peak_shift":-29,"wm25":14.6,"wm26":12.2,"wm_shift":-2.38,"first25":1,"first26":1,"arrival_shift":0},{"name":"Eastern Phoebe","n25":236,"n26":261,"peak25":27,"peak26":1,"peak_shift":-26,"wm25":16.4,"wm26":4.7,"wm_shift":-11.77,"first25":1,"first26":1,"arrival_shift":0},{"name":"White-breasted Nuthatch","n25":714,"n26":115,"peak25":16,"peak26":1,"peak_shift":-15,"wm25":13.8,"wm26":8.6,"wm_shift":-5.2,"first25":1,"first26":1,"arrival_shift":0},{"name":"Tree Swallow","n25":523,"n26":204,"peak25":24,"peak26":12,"peak_shift":-12,"wm25":18.0,"wm26":14.6,"wm_shift":-3.34,"first25":1,"first26":3,"arrival_shift":2},{"name":"American Crow","n25":224,"n26":80,"peak25":20,"peak26":8,"peak_shift":-12,"wm25":15.3,"wm26":13.0,"wm_shift":-2.28,"first25":1,"first26":1,"arrival_shift":0},{"name":"Northern Flicker","n25":500,"n26":335,"peak25":13,"peak26":9,"peak_shift":-4,"wm25":9.2,"wm26":15.3,"wm_shift":6.01,"first25":1,"first26":1,"arrival_shift":0},{"name":"Golden-crowned Kinglet","n25":662,"n26":195,"peak25":10,"peak26":7,"peak_shift":-3,"wm25":9.7,"wm26":6.9,"wm_shift":-2.76,"first25":1,"first26":2,"arrival_shift":1},{"name":"Brown-headed Cowbird","n25":527,"n26":665,"peak25":26,"peak26":23,"peak_shift":-3,"wm25":18.9,"wm26":20.5,"wm_shift":1.62,"first25":3,"first26":1,"arrival_shift":-2},{"name":"Downy Woodpecker","n25":450,"n26":230,"peak25":22,"peak26":21,"peak_shift":-1,"wm25":17.5,"wm26":13.0,"wm_shift":-4.52,"first25":1,"first26":1,"arrival_shift":0},{"name":"Wood Duck","n25":668,"n26":415,"peak25":10,"peak26":10,"peak_shift":0,"wm25":10.8,"wm26":12.9,"wm_shift":2.06,"first25":1,"first26":1,"arrival_shift":0},{"name":"American Goldfinch","n25":317,"n26":545,"peak25":28,"peak26":28,"peak_shift":0,"wm25":20.0,"wm26":24.3,"wm_shift":4.3,"first25":2,"first26":2,"arrival_shift":0},{"name":"Sandhill Crane","n25":185,"n26":100,"peak25":21,"peak26":22,"peak_shift":1,"wm25":18.4,"wm26":14.2,"wm_shift":-4.18,"first25":2,"first26":2,"arrival_shift":0},{"name":"House Finch","n25":5482,"n26":9717,"peak25":24,"peak26":27,"peak_shift":3,"wm25":18.7,"wm26":20.2,"wm_shift":1.52,"first25":1,"first26":1,"arrival_shift":0},{"name":"American Robin","n25":1379,"n26":695,"peak25":2,"peak26":6,"peak_shift":4,"wm25":11.4,"wm26":14.7,"wm_shift":3.29,"first25":1,"first26":1,"arrival_shift":0},{"name":"Mourning Dove","n25":805,"n26":792,"peak25":12,"peak26":20,"peak_shift":8,"wm25":15.9,"wm26":17.0,"wm_shift":1.08,"first25":1,"first26":1,"arrival_shift":0},{"name":"Common Grackle","n25":219,"n26":337,"peak25":17,"peak26":27,"peak_shift":10,"wm25":15.7,"wm26":14.9,"wm_shift":-0.77,"first25":1,"first26":1,"arrival_shift":0},{"name":"Tufted Titmouse","n25":1077,"n26":264,"peak25":18,"peak26":29,"peak_shift":11,"wm25":20.4,"wm26":19.4,"wm_shift":-0.95,"first25":1,"first26":1,"arrival_shift":0},{"name":"Mallard","n25":1633,"n26":823,"peak25":7,"peak26":21,"peak_shift":14,"wm25":7.4,"wm26":14.9,"wm_shift":7.45,"first25":1,"first26":1,"arrival_shift":0},{"name":"Black-capped Chickadee","n25":586,"n26":376,"peak25":10,"peak26":25,"peak_shift":15,"wm25":13.3,"wm26":15.8,"wm_shift":2.53,"first25":1,"first26":1,"arrival_shift":0},{"name":"Northern Cardinal","n25":1122,"n26":509,"peak25":11,"peak26":27,"peak_shift":16,"wm25":16.3,"wm26":20.0,"wm_shift":3.68,"first25":1,"first26":1,"arrival_shift":0},{"name":"Red-bellied Woodpecker","n25":89,"n26":160,"peak25":10,"peak26":27,"peak_shift":17,"wm25":16.1,"wm26":18.9,"wm_shift":2.76,"first25":1,"first26":1,"arrival_shift":0},{"name":"Canada Goose","n25":1132,"n26":8047,"peak25":11,"peak26":30,"peak_shift":19,"wm25":15.4,"wm26":19.1,"wm_shift":3.68,"first25":1,"first26":1,"arrival_shift":0},{"name":"Pileated Woodpecker","n25":80,"n26":58,"peak25":5,"peak26":28,"peak_shift":23,"wm25":8.5,"wm26":22.6,"wm_shift":14.15,"first25":1,"first26":5,"arrival_shift":4}];
+const CURVE_SP  = [{"name":"House Finch","n25":5482,"n26":9717,"wm_shift":1.52,"curve25":[176,11,119,198,123,182,113,63,171,111,120,185,103,85,22,75,220,109,193,172,46,241,334,576,372,120,324,514,264,140],"curve26":[110,193,59,62,52,86,148,112,147,122,126,104,146,604,317,289,256,202,610,764,459,443,497,496,433,724,797,497,452,410]},{"name":"Canada Goose","n25":1132,"n26":8047,"wm_shift":3.68,"curve25":[25,0,6,20,73,17,22,14,6,15,186,1,30,137,78,22,30,31,100,79,60,10,20,7,13,34,77,16,0,3],"curve26":[162,368,72,28,152,125,87,422,130,77,201,72,184,86,417,442,575,399,388,94,81,35,103,544,275,158,173,219,410,1568]},{"name":"Mallard","n25":1633,"n26":823,"wm_shift":7.45,"curve25":[141,241,92,64,51,59,282,43,141,37,223,23,36,157,11,0,0,0,2,0,0,4,1,2,0,4,0,1,0,18],"curve26":[9,13,15,29,31,45,22,102,33,38,51,6,0,3,12,3,7,29,54,11,163,45,12,8,13,0,4,33,1,31]},{"name":"American Robin","n25":1379,"n26":695,"wm_shift":3.29,"curve25":[86,130,91,90,61,80,53,52,46,90,57,39,7,6,14,79,54,22,20,31,1,37,18,19,70,90,15,13,6,2],"curve26":[20,85,12,12,20,97,27,47,4,34,8,3,1,4,6,3,0,10,16,16,22,19,7,7,66,5,23,3,53,65]},{"name":"Northern Cardinal","n25":1122,"n26":509,"wm_shift":3.68,"curve25":[58,6,11,45,61,64,18,4,33,23,116,28,29,4,19,15,38,18,18,58,36,97,54,16,16,15,83,28,42,69],"curve26":[5,6,3,5,15,7,1,8,4,2,17,10,3,13,19,7,24,36,13,29,26,9,48,24,36,43,56,32,4,4]},{"name":"Mourning Dove","n25":805,"n26":792,"wm_shift":1.08,"curve25":[4,3,21,46,6,11,0,0,23,10,86,121,40,7,8,25,39,48,55,89,6,10,9,41,2,1,48,6,6,34],"curve26":[1,51,18,2,13,1,63,50,13,32,7,2,33,37,8,16,7,4,2,128,14,57,54,13,12,17,45,7,66,19]},{"name":"Tufted Titmouse","n25":1077,"n26":264,"wm_shift":-0.95,"curve25":[14,6,2,2,5,22,5,3,22,41,0,5,12,1,0,4,19,315,88,52,1,10,48,6,146,32,40,130,4,42],"curve26":[2,0,26,0,0,4,4,25,3,1,25,0,0,1,9,8,16,1,1,0,13,1,0,0,0,4,1,15,72,32]},{"name":"Brown-headed Cowbird","n25":527,"n26":665,"wm_shift":1.62,"curve25":[0,0,2,1,27,27,1,1,16,0,34,0,27,18,24,37,19,18,18,5,19,21,25,7,35,68,12,17,14,34],"curve26":[5,3,14,1,1,6,18,14,28,9,5,11,11,15,9,13,51,8,14,25,5,29,83,37,43,61,64,19,45,18]},{"name":"Wood Duck","n25":668,"n26":415,"wm_shift":2.06,"curve25":[13,14,23,61,66,45,51,9,68,74,48,0,1,2,20,56,4,5,3,15,5,4,1,3,71,6,0,0,0,0],"curve26":[67,69,1,1,9,5,1,17,6,71,1,2,0,1,0,7,0,7,8,13,3,10,4,3,7,15,38,14,22,13]},{"name":"Black-capped Chickadee","n25":586,"n26":376,"wm_shift":2.53,"curve25":[33,7,6,37,17,11,53,28,20,77,10,31,21,2,4,37,11,5,6,26,0,47,23,9,16,12,21,10,3,3],"curve26":[2,31,10,2,3,2,34,24,24,5,11,3,4,5,0,6,18,14,5,22,19,21,20,4,46,36,2,2,0,1]},{"name":"American Goldfinch","n25":317,"n26":545,"wm_shift":4.3,"curve25":[0,1,0,5,4,12,9,4,23,5,7,23,5,1,0,20,7,1,0,2,8,33,17,2,2,16,5,73,7,25],"curve26":[0,1,0,0,2,1,5,6,16,2,0,10,8,1,1,1,5,16,20,22,10,37,8,11,19,34,72,172,49,16]},{"name":"Golden-crowned Kinglet","n25":662,"n26":195,"wm_shift":-2.76,"curve25":[56,11,7,25,3,6,16,103,105,111,60,22,0,22,29,45,15,1,13,11,1,0,0,0,0,0,0,0,0,0],"curve26":[0,16,3,0,17,14,97,35,0,7,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,0]},{"name":"Northern Flicker","n25":500,"n26":335,"wm_shift":6.01,"curve25":[51,3,36,48,18,25,48,19,16,44,23,17,76,3,2,21,5,1,19,2,0,0,0,12,1,0,2,2,5,1],"curve26":[12,3,22,5,6,9,13,3,35,19,0,1,12,25,17,5,7,28,7,1,1,5,9,29,4,13,35,2,7,0]},{"name":"White-breasted Nuthatch","n25":714,"n26":115,"wm_shift":-5.2,"curve25":[9,76,2,9,7,21,50,3,49,11,71,14,44,2,4,82,79,15,5,18,5,47,10,3,6,6,26,19,3,18],"curve26":[19,11,7,4,3,11,7,8,0,2,14,2,14,0,0,0,0,0,1,0,0,1,0,0,0,3,4,1,3,0]},{"name":"Tree Swallow","n25":523,"n26":204,"wm_shift":-3.34,"curve25":[1,0,15,50,37,12,4,0,0,4,9,5,6,42,0,11,15,17,2,56,6,17,22,58,37,10,20,14,1,52],"curve26":[0,0,3,1,0,20,0,2,29,0,2,71,1,3,3,0,16,0,0,0,0,11,6,4,0,15,15,1,1,0]}];
+
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#30363d';
+Chart.defaults.font.family = "-apple-system,'Segoe UI',system-ui,sans-serif";
+
+// ── peak shift chart ─────────────────────────────────────────────────────────
+(function () {
+  const ctx = document.getElementById('peak-chart').getContext('2d');
+  const bg  = PEAK_DATA.map(d => d.peak_shift < 0
+    ? 'rgba(63,185,80,0.82)' : 'rgba(240,136,62,0.82)');
+  const hov = PEAK_DATA.map(d => d.peak_shift < 0
+    ? 'rgba(63,185,80,1)' : 'rgba(240,136,62,1)');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: PEAK_DATA.map(d => d.name),
+      datasets: [{ data: PEAK_DATA.map(d => d.peak_shift),
+        backgroundColor: bg, hoverBackgroundColor: hov,
+        borderRadius: 4, borderSkipped: false }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: c => c[0].label,
+            label: c => {
+              const d = PEAK_DATA[c.dataIndex];
+              const dir = d.peak_shift < 0 ? 'earlier' : 'later';
+              const wm  = d.wm_shift != null
+                ? ` | wt-mean ${d.wm_shift > 0 ? '+' : ''}${d.wm_shift.toFixed(1)}d`
+                : '';
+              return [
+                `Peak: Apr ${d.peak25} → Apr ${d.peak26} (${Math.abs(d.peak_shift)} days ${dir} in 2026)${wm}`,
+                `Detections: ${d.n25.toLocaleString()} (2025) / ${d.n26.toLocaleString()} (2026)`
+              ];
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: '#30363d' },
+          ticks: { color: '#8b949e', font: { size: 11 } },
+          title: { display: true,
+            text: '← days earlier in 2026   |   days later in 2026 →',
+            color: '#8b949e', font: { size: 11 } }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#e6edf3', font: { size: 12 } }
+        }
+      }
+    }
+  });
+})();
+
+// ── daily curve charts ───────────────────────────────────────────────────────
+const APR = Array.from({length: 30}, (_, i) => i + 1);
+
+CURVE_SP.forEach((sp, i) => {
+  const el = document.getElementById('cc' + i);
+  if (!el) return;
+  new Chart(el.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: APR,
+      datasets: [
+        { label: '2025', data: sp.curve25,
+           borderColor: '#58a6ff', backgroundColor: 'rgba(88,166,255,0.1)',
+           fill: true, tension: 0.4, pointRadius: 0, borderWidth: 1.6 },
+        { label: '2026', data: sp.curve26,
+           borderColor: '#3fb950', backgroundColor: 'rgba(63,185,80,0.1)',
+           fill: true, tension: 0.4, pointRadius: 0, borderWidth: 1.6 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true, position: 'top', align: 'end',
+          labels: { boxWidth: 8, boxHeight: 8, padding: 6, font: { size: 9 } }
+        },
+        tooltip: {
+          mode: 'index', intersect: false,
+          callbacks: { title: c => 'Apr ' + c[0].label }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(48,54,61,.5)' },
+          ticks: {
+            color: '#8b949e', font: { size: 9 }, maxTicksLimit: 5,
+            callback: (_, i) => 'Apr ' + (i + 1)
+          }
+        },
+        y: {
+          grid: { color: 'rgba(48,54,61,.5)' },
+          ticks: { color: '#8b949e', font: { size: 9 }, maxTicksLimit: 4 },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
