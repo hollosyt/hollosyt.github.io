@@ -180,6 +180,10 @@ front_pines_r = [(1112, 355, 108, 56), (1170, 356, 150, 76), (1232, 354, 112, 58
 
 
 # ------------------------------------------------------------------ school
+# Discovery Elementary's colours are green and white (blue and gold are Williamston's).
+GREEN, GREEN_DEEP, GREEN_LIT = "#1d6b46", "#134a31", "#2f8a5c"
+
+
 def roof_snow(x0, x1, y, rise=6):
     rr = random.Random(int(x0 * 7 + x1))
     pts = []
@@ -270,23 +274,24 @@ school = ['  <g class="school">']
 # gym block
 school.append('<rect x="372" y="240" width="116" height="112" fill="url(#sc-wall2)"/>')
 school.append('<rect x="372" y="240" width="116" height="112" fill="url(#sc-brick)"/>')
-school.append('<rect x="366" y="230" width="128" height="12" rx="3" fill="#090b20"/>')
+school.append(f'<rect x="366" y="230" width="128" height="12" rx="3" fill="{GREEN}"/><rect x="366" y="239" width="128" height="3" fill="{GREEN_DEEP}"/>')
 school.append(roof_snow(366, 494, 230, 7))
 # rooftop unit
 school.append('<rect x="862" y="252" width="44" height="12" rx="2" fill="#0c0e27"/>' + roof_snow(862, 906, 252, 4))
 # main wing
 school.append('<rect x="474" y="266" width="500" height="86" fill="url(#sc-wall)"/>')
 school.append('<rect x="474" y="266" width="500" height="86" fill="url(#sc-brick)"/>')
-school.append('<rect x="468" y="258" width="512" height="11" rx="3" fill="#090b20"/>')
+school.append(f'<rect x="468" y="258" width="512" height="11" rx="3" fill="{GREEN}"/><rect x="468" y="266" width="512" height="3" fill="{GREEN_DEEP}"/>')
 school.append(roof_snow(468, 980, 258, 6))
 # entrance block
 school.append('<rect x="660" y="246" width="120" height="106" fill="url(#sc-wall2)"/>')
 school.append('<rect x="660" y="246" width="120" height="106" fill="url(#sc-brick)"/>')
-school.append('<rect x="652" y="237" width="136" height="12" rx="3" fill="#080a1f"/>')
+school.append(f'<rect x="652" y="237" width="136" height="12" rx="3" fill="{GREEN}"/><rect x="652" y="246" width="136" height="3" fill="{GREEN_DEEP}"/>')
 school.append(roof_snow(652, 788, 237, 8))
 # backlit letters
-school.append('<text x="720" y="271" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="11" font-weight="800" '
-              'letter-spacing="2.4" fill="#ffd27a" style="filter:drop-shadow(0 0 3px rgba(255,190,90,.8))">DISCOVERY</text>')
+school.append(f'<rect x="668" y="258" width="104" height="19" rx="2.5" fill="{GREEN}" stroke="#f4f7f2" stroke-opacity=".85" stroke-width="1.2"/>')
+school.append('<text x="720" y="271.5" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="11" font-weight="800" '
+              'letter-spacing="2.4" fill="#fff" style="filter:drop-shadow(0 0 2.5px rgba(255,255,255,.55))">DISCOVERY</text>')
 # gym clerestory
 for i in range(4):
     school.append(window(386 + i * 25, 252, 16, 12, dim=True))
@@ -302,7 +307,7 @@ for x, deco in zip((798, 854, 910), ("kids", "stars", "art")):
 school.append('<rect x="366" y="347" width="614" height="5" fill="#080a1f"/>')
 # canopy glow + doors
 school.append('<ellipse cx="720" cy="318" rx="78" ry="30" fill="#ffb24a" opacity=".5" filter="url(#sc-blur)"/>')
-school.append('<rect x="684" y="296" width="72" height="56" rx="2" fill="#0a0c22"/>')
+school.append(f'<rect x="684" y="296" width="72" height="56" rx="2" fill="{GREEN_DEEP}"/>')
 school.append('<rect class="win" x="687" y="299" width="32" height="53" rx="1" fill="url(#sc-door)"/>')
 school.append('<rect class="win" x="721" y="299" width="32" height="53" rx="1" fill="url(#sc-door)"/>')
 # someone waiting inside to say hello
@@ -312,8 +317,8 @@ school.append('<g fill="#8c4a10" fill-opacity=".42"><circle cx="733" cy="318" r=
 school.append('<path d="M703 299v53M737 299v53M687 316h66" stroke="#0a0c22" stroke-width="1.6" stroke-opacity=".7"/>')
 school.append('<rect x="714" y="322" width="2" height="9" rx="1" fill="#0a0c22"/><rect x="724" y="322" width="2" height="9" rx="1" fill="#0a0c22"/>')
 # canopy
-school.append('<rect x="644" y="284" width="152" height="9" rx="2" fill="#080a1f"/>' + roof_snow(644, 796, 284, 5))
-school.append('<rect x="652" y="293" width="3.5" height="59" fill="#080a1f"/><rect x="784.5" y="293" width="3.5" height="59" fill="#080a1f"/>')
+school.append(f'<rect x="644" y="284" width="152" height="9" rx="2" fill="{GREEN}"/><rect x="644" y="290" width="152" height="3" fill="{GREEN_DEEP}"/>' + roof_snow(644, 796, 284, 5))
+school.append(f'<rect x="652" y="293" width="3.5" height="59" fill="{GREEN_DEEP}"/><rect x="784.5" y="293" width="3.5" height="59" fill="{GREEN_DEEP}"/>')
 # bushes along the foundation
 for bx in (478, 532, 590, 640, 800, 858, 914, 962):
     school.append(bush(bx, 355, .85))
@@ -321,8 +326,9 @@ school.append("</g>")
 add("".join(school))
 
 # flagpole
-add('  <g><rect x="1060" y="186" width="3" height="170" fill="#0b0d26"/><circle cx="1061.5" cy="185" r="2.8" fill="#ffd27a" opacity=".8"/>'
-    '<path class="flag" d="M1063 191c10-4 18 3 30-1v21c-12 4-20-3-30 1Z" fill="#e2603f" opacity=".92"/></g>')
+add('  <g><rect x="1060" y="186" width="3" height="170" fill="#0b0d26"/><circle cx="1061.5" cy="185" r="2.8" fill="#dfe3f6" opacity=".85"/>'
+    f'<path class="flag" d="M1063 191c10-4 18 3 30-1v21c-12 4-20-3-30 1Z" fill="{GREEN_LIT}"/>'
+    '<path d="M1063 198c10-4 18 3 30-1v6c-12 4-20-3-30 1Z" fill="#f4f7f2"/></g>')
 
 # front pines
 add("  <g>" + "".join(pine(*p) for p in front_pines_l + front_pines_r) + "</g>")
