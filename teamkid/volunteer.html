@@ -19,17 +19,14 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="logo" href="index.html" aria-label="TeamKid Williamston — home">
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <defs>
-          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f5a524"/>
-          </linearGradient>
-        </defs>
-        <path d="M24 2.5c1.1 0 2 .9 3.7 5.4 1.7 4.5 2.6 5.3 7.2 6.5 4.6 1.2 5.6 2 5.6 3.2s-1 2-4.1 5.5c-3.1 3.5-3.3 4.6-2.6 9.3.7 4.7.3 5.8-.7 6.4-1 .6-2.1.2-6.2-2-4.1-2.2-5.3-2.2-9.4 0-4.1 2.2-5.2 2.6-6.2 2-1-.6-1.4-1.7-.7-6.4.7-4.7.5-5.8-2.6-9.3C4.9 19.6 3.9 18.4 3.9 17.2c0-1.2 1-2 5.6-3.2 4.6-1.2 5.5-2 7.2-6.5C18.4 3.4 19.3 2.5 24 2.5Z" fill="url(#lg)"/>
-        <circle cx="19" cy="21" r="1.9" fill="#12132e"/>
-        <circle cx="29" cy="21" r="1.9" fill="#12132e"/>
-        <path d="M19.5 27.5c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.5-2.5" stroke="#12132e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-      </svg>
+      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="23" fill="#12132e"/>
+          <circle cx="24" cy="24" r="22.25" fill="none" stroke="#ffd27a" stroke-opacity=".28" stroke-width="1.5"/>
+          <g transform="translate(24 25) scale(.64) translate(-24 -24)" fill="#ffd27a">
+            <path d="M6 19H22M14 19V41M29 19V41M29.5 31.5 41 19M34 27 42 41" fill="none" stroke="#ffd27a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="kid" cx="14" cy="9" r="5"/><circle class="kid" cx="29" cy="9" r="5"/>
+          </g>
+        </svg>
       <span class="logo-type"><b>TeamKid</b><span>Williamston</span></span>
     </a>
 
@@ -56,6 +53,7 @@
 <main id="main">
 <section class="page-hero">
   <div class="wrap">
+    <img class="page-hero-art" src="assets/school-at-dusk.svg" alt="" width="340" height="340">
     <p class="crumbs"><a href="index.html">Home</a> <span aria-hidden="true">/</span> Volunteer</p>
     <p class="eyebrow">Why volunteer</p>
     <h1>Daring to make a difference in a child&rsquo;s life just might change yours.</h1>
@@ -167,18 +165,21 @@
 
 <section class="section" id="covenant">
   <div class="wrap">
+    <div class="split">
+    <div class="split-aside">
     <div class="head reveal">
       <p class="eyebrow">Covenant</p>
       <h2>Leader covenant.</h2>
-      <p>Adult leaders and student leaders each agree to the following.</p>
+      <p>Adult leaders and student leaders each agree to the following:</p>
     </div>
 
     <div class="tabs reveal" data-tabs role="tablist" aria-label="Leader covenants">
       <button class="tab" type="button" role="tab" id="tab-adult" aria-controls="panel-adult" aria-selected="true">Adult leader</button>
       <button class="tab" type="button" role="tab" id="tab-student" aria-controls="panel-student" aria-selected="false" tabindex="-1">Student leader</button>
     </div>
+    </div>
 
-    <div class="mt-3">
+    <div class="split-main">
       <ol class="numbered tabpanel" id="panel-adult" role="tabpanel" aria-labelledby="tab-adult">
         <li><div><p>I understand I am at TeamKid Williamston to help children know, live and share the Truth of Jesus Christ.</p></div></li>
         <li><div><p>I understand how important it is for me to help children behave in a kind, safe, and respectful way. I will do my best to understand and implement all TeamKid and school rules.</p></div></li>
@@ -200,6 +201,7 @@
         <li><div><p>I commit to praying for the children in my group and for their parents.</p></div></li>
         <li><div><p>I understand that the expectations in place are for the protection of children and myself. I agree to follow these expectations and I am committed to keeping children safe.</p></div></li>
       </ol>
+    </div>
     </div>
   </div>
 </section>
@@ -233,11 +235,13 @@
       </details>
       <details>
         <summary>What training and support is available?</summary>
-        <div class="acc-body"><p>Volunteer training covers TeamKid philosophy and goals, group management and expectations. The training
-      is modeled after an actual TeamKid session, which helps acquaint you with the timing and structure of a session.</p>
-     <p>In addition, coaches and assistant coaches have their own binder with conversation starters and other
-      developmentally appropriate material to support them. TeamKid leadership checks in with volunteers on a regular
-      basis to see how we can best pray for, support and encourage you.</p></div>
+        <div class="acc-body"><p>Volunteer training will be a one-time meeting each year and will occur 1&ndash;2 weeks
+      before TeamKid officially starts. We will cover TeamKid philosophy and goals, group management, and expectations,
+      and will help acquaint you with the timing and structure of a session.</p>
+     <p>After the season starts, TeamKid leadership will check in regularly to see how we can best pray for, support,
+      and encourage you. Because our middle schoolers are our youngest volunteers, TK leaders meet with them once a
+      month at the middle school during lunch. These times provide an opportunity to listen to any concerns they may
+      have, offer encouragement, and help them grow in their faith as they serve.</p></div>
       </details>
     </div>
 
@@ -255,14 +259,21 @@
   <div class="wrap footer-grid">
     <div>
       <a class="logo" href="index.html" aria-label="TeamKid Williamston — home">
-        <svg viewBox="0 0 48 48" aria-hidden="true" style="width:34px;height:34px">
-          <path d="M24 2.5c1.1 0 2 .9 3.7 5.4 1.7 4.5 2.6 5.3 7.2 6.5 4.6 1.2 5.6 2 5.6 3.2s-1 2-4.1 5.5c-3.1 3.5-3.3 4.6-2.6 9.3.7 4.7.3 5.8-.7 6.4-1 .6-2.1.2-6.2-2-4.1-2.2-5.3-2.2-9.4 0-4.1 2.2-5.2 2.6-6.2 2-1-.6-1.4-1.7-.7-6.4.7-4.7.5-5.8-2.6-9.3C4.9 19.6 3.9 18.4 3.9 17.2c0-1.2 1-2 5.6-3.2 4.6-1.2 5.5-2 7.2-6.5C18.4 3.4 19.3 2.5 24 2.5Z" fill="#f5a524"/>
-          <circle cx="19" cy="21" r="1.9" fill="#12132e"/><circle cx="29" cy="21" r="1.9" fill="#12132e"/>
-          <path d="M19.5 27.5c1.4 1.7 3 2.5 4.6 2.5s3.2-.8 4.5-2.5" stroke="#12132e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <svg class="mark" viewBox="0 0 48 48" aria-hidden="true" style="width:34px;height:34px">
+          <circle cx="24" cy="24" r="23" fill="#12132e"/>
+          <circle cx="24" cy="24" r="22.25" fill="none" stroke="#ffd27a" stroke-opacity=".28" stroke-width="1.5"/>
+          <g transform="translate(24 25) scale(.64) translate(-24 -24)" fill="#ffd27a">
+            <path d="M6 19H22M14 19V41M29 19V41M29.5 31.5 41 19M34 27 42 41" fill="none" stroke="#ffd27a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle class="kid" cx="14" cy="9" r="5"/><circle class="kid" cx="29" cy="9" r="5"/>
+          </g>
         </svg>
         <span class="logo-type"><b>TeamKid</b><span>Williamston</span></span>
       </a>
-      <p style="margin-top:1.1rem;max-width:34ch;color:rgba(255,255,255,.65)">
+      <p class="tagline">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 12.5c2.6-.9 5-.5 7 1 .8-4 3.4-7.6 8.5-9.3-1.6 2.9-2 5.5-1.2 8 1.4-.7 3-.8 4.2-.1-1.3.5-2.3 1.3-2.9 2.5-1.6 3.4-5 5.6-9 5.6-2.9 0-5.4-1.1-7-3.1 1.6.2 3.1 0 4.2-.6-1.7-1.2-3.3-2.4-3.8-4Z"/></svg>
+        Seeking God&rsquo;s Heart Together!
+      </p>
+      <p style="margin-top:.6rem;max-width:34ch;color:rgba(255,255,255,.65)">
         Free after school Bible club for boys and girls in Kindergarten &ndash; 5th grade.
       </p>
     </div>

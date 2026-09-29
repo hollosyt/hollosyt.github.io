@@ -205,8 +205,12 @@ a:hover { color: var(--clay); }
 }
 
 .logo { display: inline-flex; align-items: center; gap: .68rem; text-decoration: none; color: inherit; margin-right: auto; }
-.logo svg { width: 38px; height: 38px; flex: none; transition: transform .5s cubic-bezier(.2,.9,.3,1.3); }
-.logo:hover svg { transform: rotate(-16deg) scale(1.08); }
+.logo svg { width: 38px; height: 38px; flex: none; }
+/* the monogram's two heads (from TeamKid's own "TK" logo) hop on hover */
+.mark .kid { transform-box: fill-box; transition: transform .38s cubic-bezier(.2,.9,.3,1.5); }
+.logo:hover .mark .kid { transform: translateY(-2.5px); }
+.logo:hover .mark .kid + .kid { transition-delay: .07s; }
+@media (prefers-reduced-motion: reduce) { .mark .kid { transition: none; } }
 .logo-type { display: grid; line-height: 1; }
 .logo-type b {
   font-family: var(--display); font-size: 1.32rem; font-weight: 700;
@@ -332,13 +336,42 @@ a:hover { color: var(--clay); }
 
 /* the warm glow spilling out of the cafeteria */
 .hero-glow {
-  position: absolute; z-index: 1; left: 50%; bottom: 4%;
-  width: min(1100px, 130vw); aspect-ratio: 1.6 / 1; translate: -50% 0;
-  background: radial-gradient(ellipse at center, rgba(255,196,107,.5), rgba(245,165,36,.14) 42%, transparent 68%);
-  filter: blur(14px); pointer-events: none;
+  position: absolute; z-index: 1; left: 50%; bottom: 0;
+  width: min(1500px, 160vw); height: calc(var(--scene-h) * 1.25); translate: -50% 0;
+  background: radial-gradient(50% 60% at 50% 80%, rgba(255,184,102,.34), rgba(233,138,90,.1) 55%, transparent 80%);
+  pointer-events: none;
 }
 
-.hero-inner { position: relative; z-index: 4; padding-bottom: clamp(11rem, 26vw, 19rem); }
+/* light snow falling over the whole scene: two tiled layers at different speeds */
+.snowfall { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; opacity: .7; }
+.snowfall::before, .snowfall::after {
+  content: ""; position: absolute; left: 0; right: 0; top: -300px; bottom: 0;
+  background-image:
+    radial-gradient(circle at 18px 34px,   rgba(255,255,255,.85) 1.2px, transparent 1.9px),
+    radial-gradient(circle at 96px 150px,  rgba(255,255,255,.7)  1px,   transparent 1.7px),
+    radial-gradient(circle at 170px 72px,  rgba(255,255,255,.8)  1.3px, transparent 2px),
+    radial-gradient(circle at 228px 236px, rgba(255,255,255,.65) 1px,   transparent 1.7px),
+    radial-gradient(circle at 60px 262px,  rgba(255,255,255,.75) 1.1px, transparent 1.8px),
+    radial-gradient(circle at 132px 210px, rgba(255,255,255,.6)  .9px,  transparent 1.6px);
+  background-size: 260px 300px;
+  animation: snowfall 16s linear infinite;
+}
+.snowfall::after {
+  top: -420px; opacity: .75;
+  background-size: 380px 420px;
+  background-image:
+    radial-gradient(circle at 40px 60px,   rgba(255,255,255,.9) 1.8px, transparent 2.6px),
+    radial-gradient(circle at 250px 190px, rgba(255,255,255,.8) 1.6px, transparent 2.4px),
+    radial-gradient(circle at 140px 340px, rgba(255,255,255,.85) 2px,  transparent 2.8px),
+    radial-gradient(circle at 330px 60px,  rgba(255,255,255,.7) 1.5px, transparent 2.3px);
+  animation-duration: 21s; animation-name: snowfall-lg;
+}
+@keyframes snowfall    { to { transform: translate3d(0, 300px, 0); } }
+@keyframes snowfall-lg { to { transform: translate3d(0, 420px, 0); } }
+@media (prefers-reduced-motion: reduce) { .snowfall::before, .snowfall::after { animation: none; } }
+
+.hero { --scene-h: clamp(250px, 31vw, 480px); }
+.hero-inner { position: relative; z-index: 4; padding-bottom: calc(var(--scene-h) * .6); }
 .hero-copy { max-width: 43rem; }
 
 .hero-badge {
@@ -386,8 +419,9 @@ a:hover { color: var(--clay); }
 /* the dusk scene */
 .hero-scene {
   position: absolute; left: 0; right: 0; bottom: -1px; z-index: 3;
-  width: 100%; height: auto; display: block; pointer-events: none;
+  width: 100%; height: var(--scene-h); display: block; pointer-events: none;
 }
+.hero-scene .scene-edge { fill: var(--bg); }
 .win { animation: flicker 7s ease-in-out infinite; transform-origin: center; }
 .win:nth-of-type(2n) { animation-delay: -2.4s; }
 .win:nth-of-type(3n) { animation-delay: -4.1s; }
@@ -426,7 +460,7 @@ a:hover { color: var(--clay); }
 /* section heading block */
 .head { max-width: 46rem; margin-bottom: clamp(2.2rem, 5vw, 3.6rem); }
 .head.center { margin-inline: auto; }
-.head p { color: var(--fg-muted); font-size: clamp(1.02rem, .98rem + .35vw, 1.18rem); margin-bottom: 0; }
+.head p:not(.eyebrow) { color: var(--fg-muted); font-size: clamp(1.02rem, .98rem + .35vw, 1.18rem); margin-bottom: 0; }
 
 /* torn-paper divider — a hand-torn edge between the lit rooms and the night */
 .tear { display: block; width: 100%; height: clamp(26px, 3.4vw, 46px); margin-block: -1px; }
@@ -450,9 +484,6 @@ a:hover { color: var(--clay); }
   font-size: 4em; line-height: 1; color: var(--accent); opacity: .16; pointer-events: none;
 }
 
-/* stat / number */
-.stat { font-family: var(--display); font-weight: 700; line-height: .95; letter-spacing: -.04em; font-variation-settings: "SOFT" 20, "WONK" 1; }
-
 /* pill list */
 .pills { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
 .pill {
@@ -469,16 +500,29 @@ a:hover { color: var(--clay); }
 
 .night {
   position: relative; isolation: isolate; overflow: hidden;
-  background: linear-gradient(165deg, var(--night) 0%, var(--night-2) 55%, #2f2a5c 100%);
+  background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 55%, #2f2a5c 100%);
   color: #fff;
 }
 .night::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background-image: var(--grain); opacity: .2; mix-blend-mode: overlay;
 }
+.night::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .55;
+  background-image:
+    radial-gradient(circle at 12% 18%, #fff 0 1px, transparent 1.6px),
+    radial-gradient(circle at 31% 64%, #fff 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 47% 12%, #ffe9c2 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 66% 42%, #fff 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 83% 22%, #cfe0ff 0 1px, transparent 1.6px),
+    radial-gradient(circle at 92% 76%, #fff 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 6% 84%, #fff 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 58% 88%, #ffe9c2 0 .9px, transparent 1.5px);
+  background-size: 520px 360px;
+}
 .night > * { position: relative; z-index: 1; }
 .night h2, .night h3 { color: #fff; }
-.night p { color: rgba(255,255,255,.76); }
+.night p, .night .head p:not(.eyebrow) { color: rgba(255,255,255,.76); }
 .night .eyebrow { color: var(--honey); }
 .night a:not(.btn) { color: var(--honey); }
 .night .card {
@@ -553,13 +597,30 @@ a:hover { color: var(--clay); }
   display: grid; place-items: center; position: relative; z-index: 1;
 }
 .season-dot::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-.season-step:first-child .season-dot, .season-step:last-child .season-dot { border-color: var(--clay); }
-.season-step:first-child .season-dot::after, .season-step:last-child .season-dot::after { background: var(--clay); }
+.season-line + .season-step .season-dot, .season-step:last-child .season-dot { border-color: var(--clay); }
+.season-line + .season-step .season-dot::after, .season-step:last-child .season-dot::after { background: var(--clay); }
 .season-step b {
   display: block; font-family: var(--display); font-size: 1.15rem; font-weight: 600;
   letter-spacing: -.02em; font-variation-settings: "SOFT" 30, "WONK" 1;
 }
 .season-step span { display: block; font-size: .8rem; color: var(--fg-muted); margin-top: .15rem; line-height: 1.35; }
+.night .season-line {
+  height: 2px; top: 14px; opacity: 1;
+  background: linear-gradient(90deg, rgba(255,210,122,.25), var(--honey) 20%, var(--honey) 80%, rgba(255,210,122,.25));
+  box-shadow: 0 0 14px rgba(255,196,107,.55);
+}
+.night .season-dot {
+  background: var(--night); border: 2px solid var(--honey);
+  box-shadow: 0 0 0 6px rgba(255,210,122,.08), 0 0 20px rgba(255,196,107,.5);
+}
+.night .season-dot::after { background: var(--honey); }
+.night .season-line + .season-step .season-dot, .night .season-step:last-child .season-dot {
+  border-color: var(--honey); background: var(--honey);
+  box-shadow: 0 0 0 7px rgba(255,210,122,.14), 0 0 28px rgba(255,196,107,.8);
+}
+.night .season-line + .season-step .season-dot::after, .night .season-step:last-child .season-dot::after { background: var(--night); }
+.night .season-step b { color: #fff; font-size: 1.3rem; }
+.night .season-step span { color: rgba(255,255,255,.62); }
 @media (max-width: 560px) {
   .season-track { grid-template-columns: 1fr; gap: 1.2rem; text-align: left; }
   .season-line { display: none; }
@@ -662,15 +723,6 @@ a:hover { color: var(--clay); }
   word-break: break-word;
 }
 
-.buys { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
-.buys li {
-  list-style: none; display: inline-flex; align-items: center; gap: .55rem;
-  padding: .6rem 1.05rem; border-radius: 99px;
-  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.17);
-  font-weight: 600; font-size: .92rem;
-}
-.buys svg { width: 1.1rem; height: 1.1rem; color: var(--honey); flex: none; }
-
 /* --------------------------------------------------------------- 16. Form */
 
 .form { display: grid; gap: 1.1rem; }
@@ -699,6 +751,11 @@ a:hover { color: var(--clay); }
 @media (min-width: 760px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; } }
 .site-footer .logo-type b { color: #fff; }
 .site-footer .logo-type span { color: rgba(255,255,255,.5); }
+.tagline {
+  display: flex; align-items: center; gap: .5rem; margin: 1.1rem 0 0;
+  font-family: var(--display); font-style: italic; font-size: 1.12rem; color: var(--honey);
+}
+.tagline svg { width: 1.35rem; height: 1.35rem; flex: none; }
 .footer-grid h4 { color: #fff; font-size: .74rem; letter-spacing: .17em; text-transform: uppercase; font-family: var(--sans); font-weight: 800; margin-bottom: 1rem; }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
 .footer-grid a { color: rgba(255,255,255,.72); text-decoration: none; }
@@ -721,9 +778,33 @@ a:hover { color: var(--clay); }
 .page-hero .wrap { position: relative; z-index: 1; padding-block: clamp(3.2rem, 8vw, 6rem); }
 .page-hero h1 { max-width: 20ch; }
 .page-hero .lede { max-width: 54ch; margin-top: .4rem; }
+
+/* a porthole onto the same dusk scene as the home page */
+.page-hero-art { display: none; }
+@media (min-width: 1000px) {
+  .page-hero { --art: clamp(270px, 25vw, 340px); }
+  .page-hero-art {
+    display: block; position: absolute; right: var(--pad); top: 50%; translate: 0 -50%;
+    width: var(--art); height: var(--art); border-radius: 50%;
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--amber) 18%, transparent),
+                0 0 0 1px color-mix(in oklab, var(--amber) 30%, transparent),
+                0 34px 60px -26px rgba(18, 19, 46, .6);
+  }
+  .page-hero .wrap > :not(.page-hero-art) { max-width: calc(100% - var(--art) - 3.5rem); }
+}
 .crumbs { font-size: .8rem; color: var(--fg-faint); margin-bottom: 1.4rem; letter-spacing: .04em; }
 .crumbs a { color: var(--fg-muted); text-decoration: none; font-weight: 600; }
 .crumbs a:hover { color: var(--accent); }
+
+/* heading (and tabs) pinned beside a long list on wide screens */
+@media (min-width: 960px) {
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(3rem, 6vw, 5.5rem); align-items: start; }
+  .split > .head, .split > .split-aside { position: sticky; top: 7rem; margin-bottom: 0; }
+  .split .numbered { max-width: none; }
+  .split-aside .head { margin-bottom: 0; }
+  .split .tabs { margin-top: 1.8rem; }
+}
+@media (max-width: 959px) { .split-main { margin-top: 2rem; } }
 
 /* ------------------------------------------------------------ 19. Reveal */
 
@@ -733,6 +814,7 @@ a:hover { color: var(--clay); }
 
 /* ------------------------------------------------------------- 20. Utility */
 
+.nowrap { white-space: nowrap; }
 .mt-0 { margin-top: 0; }
 .mt-2 { margin-top: 1.2rem; }
 .mt-3 { margin-top: 2rem; }
@@ -784,4 +866,12 @@ a:hover { color: var(--clay); }
   .header-actions > .btn { display: none; }
   .nav .nav-cta { display: block; color: var(--accent); font-weight: 800; }
   .site-header.is-over .nav .nav-cta { color: var(--honey); }
+}
+
+/* Season ribbon turns vertical on phones */
+@media (max-width: 560px) {
+  .night .season-step:not(:last-child)::before {
+    content: ""; position: absolute; left: 13px; top: 26px; bottom: calc(-1.2rem - 2px); width: 2px;
+    background: rgba(255,210,122,.55); box-shadow: 0 0 10px rgba(255,196,107,.5);
+  }
 }
