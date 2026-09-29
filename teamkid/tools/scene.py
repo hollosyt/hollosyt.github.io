@@ -328,8 +328,8 @@ add("".join(school))
 # flagpole
 add('  <g><rect x="1060" y="186" width="3" height="170" fill="#0b0d26"/><circle cx="1061.5" cy="185" r="2.8" fill="#dfe3f6" opacity=".85"/>'
     f'<path class="flag" d="M1063 191c10-4 18 3 30-1v21c-12 4-20-3-30 1Z" fill="{GREEN_LIT}"/>'
-    # block W for Williamston
-    '<path d="M1071 195.2L1074.4 195.2L1075.6 201.8L1077 197.6L1079 197.6L1080.4 201.8L1081.6 195.2L1085 195.2L1082.4 207.2L1079.4 207.2L1078 202.6L1076.6 207.2L1073.6 207.2Z" fill="#f4f7f2" transform="rotate(-2 1078 201)"/></g>')
+    # slab-serif block W for Williamston
+    '<path d="M-1 0L4.4 0L4.4 1.5L3.67 1.5L4.6 6.6L6 2.4L8 2.4L9.4 6.6L10.33 1.5L9.6 1.5L9.6 0L15 0L15 1.5L13.68 1.5L11.4 12L8.4 12L7 7.4L5.6 12L2.6 12L0.33 1.5L-1 1.5Z" fill="#f4f7f2" transform="rotate(-2 1078 201) translate(1078 201) scale(.95) translate(-7 -6)"/></g>')
 
 # front pines
 add("  <g>" + "".join(pine(*p) for p in front_pines_l + front_pines_r) + "</g>")
