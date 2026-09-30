@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeamKid concepts</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&family=Fraunces:opsz,wght,SOFT@9..144,600..800,100&display=swap">
+<style>
+  /* Reviewer page: a plain index of the five concepts, in the current site's type. */
+  :root {
+    --bg: #f7f4ee; --card: #fff; --ink: #1d1e33; --muted: #5d5f78; --line: #e3ded3; --accent: #12132e;
+    --display: "Fraunces", Georgia, serif; --body: "Figtree", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12132e; --card: #1c1e42; --ink: #f3efe6; --muted: #aeb0cc; --line: #2d3063; --accent: #ffd27a; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.55 var(--body); padding-inline: 16px; }
+  main { max-width: 64rem; margin: 0 auto; padding-block: 3.5rem 4rem; }
+  h1 { font: 800 clamp(2rem, 1.4rem + 2.6vw, 3rem)/1.05 var(--display); font-variation-settings: "SOFT" 100; margin: 0 0 .6rem; text-wrap: balance; }
+  .intro { color: var(--muted); max-width: 40rem; margin: 0 0 2.5rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.25rem; list-style: none; padding: 0; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.4rem 1.2rem; display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+  .num { font: 600 .78rem var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .card h2 { font: 700 1.45rem/1.15 var(--display); margin: 0; }
+  .card h2 a { color: inherit; text-decoration: none; }
+  .card h2 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+  .pages { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; padding-top: .4rem; }
+  .pages a { font-size: .85rem; font-weight: 600; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: .25rem .7rem; text-decoration: none; }
+  .pages a:hover { border-color: var(--accent); }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  .foot { margin-top: 2.5rem; font-size: .9rem; color: var(--muted); }
+  .foot a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>TeamKid: five more fun directions</h1>
+  <p class="intro">Each concept is the full four-page site with the same words, in a new design.
+    Pick a direction, or mix parts you like.</p>
+
+  <ol class="grid">
+    <li class="card">
+      <span class="num">Concept 1</span>
+      <h2><a href="bulletin-board/index.html">Bulletin Board</a></h2>
+      <p>A classroom bulletin board: cork, construction paper, scalloped borders, pushpins and index cards. The season is a paper chain.</p>
+      <nav class="pages" aria-label="Bulletin Board pages"><a href="bulletin-board/index.html">Home</a><a href="bulletin-board/about.html">About</a><a href="bulletin-board/volunteer.html">Volunteer</a><a href="bulletin-board/donate.html">Give</a></nav>
+    </li>
+    <li class="card">
+      <span class="num">Concept 2</span>
+      <h2><a href="sticker-book/index.html">Sticker Book</a></h2>
+      <p>A sticker album: die-cut vinyl stickers with white borders that peel up when you hover. The season is a gold-star reward chart.</p>
+      <nav class="pages" aria-label="Sticker Book pages"><a href="sticker-book/index.html">Home</a><a href="sticker-book/about.html">About</a><a href="sticker-book/volunteer.html">Volunteer</a><a href="sticker-book/donate.html">Give</a></nav>
+    </li>
+    <li class="card">
+      <span class="num">Concept 3</span>
+      <h2><a href="comic-strip/index.html">Comic Strip</a></h2>
+      <p>A comic book: inked panels, halftone dots, caption boxes and burst-shaped buttons. The season is a five-panel strip.</p>
+      <nav class="pages" aria-label="Comic Strip pages"><a href="comic-strip/index.html">Home</a><a href="comic-strip/about.html">About</a><a href="comic-strip/volunteer.html">Volunteer</a><a href="comic-strip/donate.html">Give</a></nav>
+    </li>
+    <li class="card">
+      <span class="num">Concept 4</span>
+      <h2><a href="jelly-mascots/index.html">Jelly Mascots</a></h2>
+      <p>Squishy gummy shapes and two mascots drawn from the TK monogram, who wave, watch your cursor and bounce when clicked.</p>
+      <nav class="pages" aria-label="Jelly Mascots pages"><a href="jelly-mascots/index.html">Home</a><a href="jelly-mascots/about.html">About</a><a href="jelly-mascots/volunteer.html">Volunteer</a><a href="jelly-mascots/donate.html">Give</a></nav>
+    </li>
+    <li class="card">
+      <span class="num">Concept 5</span>
+      <h2><a href="snow-day/index.html">Snow Day</a></h2>
+      <p>A bright Michigan snow day: sleds, mittens and snowmen. Click the background to throw a snowball. The season is a sledding hill.</p>
+      <nav class="pages" aria-label="Snow Day pages"><a href="snow-day/index.html">Home</a><a href="snow-day/about.html">About</a><a href="snow-day/volunteer.html">Volunteer</a><a href="snow-day/donate.html">Give</a></nav>
+    </li>
+  </ol>
+
+  <p class="foot">The current design is at <a href="../index.html">the main site</a>.</p>
+</main>
+</body>
+</html>
