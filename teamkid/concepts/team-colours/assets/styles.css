@@ -707,6 +707,7 @@ em { font-style: italic; }
   .tc-spark--3 { animation-delay: -2.2s; }
   .tc-shirt { animation: tc-sway-sm 6s ease-in-out infinite alternate; }
   .tc-note { transform-box: fill-box; transform-origin: center; animation: tc-bob 3.4s ease-in-out infinite alternate; }
+  .tc-pennant { transform-box: fill-box; animation: tc-flap 4.4s ease-in-out infinite alternate; }
   .badge .dot { animation: tc-pulse 2.6s ease-in-out infinite; }
 }
 @keyframes tc-sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
