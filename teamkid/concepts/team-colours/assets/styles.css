@@ -392,36 +392,6 @@ em { font-style: italic; }
 .g-row .patch { margin-top: 2px; }
 .g-note { margin: 18px 0 0; padding: 14px 16px; border-radius: 14px; background: var(--sun-tint); font-size: 1rem; box-shadow: 0 0 0 2px var(--sun-soft) inset; }
 
-/* --------------------------------------------------------------- season pennants */
-.season-flags { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 12px; }
-.season-flags li { position: relative; display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 16px; }
-.season-flags .flag {
-  display: flex; align-items: center; height: 54px; padding: 0 30px 0 16px;
-  font: 800 1.45rem/1 var(--display); text-transform: uppercase; letter-spacing: .05em;
-  clip-path: polygon(0 0, 100% 0, 86% 50%, 100% 100%, 0 100%);
-  transform-origin: 0 50%;
-}
-.season-flags .cap { font-size: 1.02rem; }
-.season-flags li:nth-child(1) .flag { background: var(--turq-deep); color: #fff; }
-.season-flags li:nth-child(2) .flag { background: var(--neon); color: var(--ink); }
-.season-flags li:nth-child(3) .flag { background: var(--sun); color: var(--ink); }
-.season-flags li:nth-child(4) .flag { background: var(--orange); color: var(--ink); }
-.season-flags li:nth-child(5) .flag { background: var(--turq-deep); color: #fff; }
-.season-flags::before { content: ""; position: absolute; left: -6px; top: -14px; bottom: -14px; width: 5px; border-radius: 3px; background: #9AAEC2; }
-
-@media (min-width: 760px) {
-  .season-flags { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; padding-top: 8px; }
-  .season-flags::before { left: -2%; right: -2%; top: 4px; bottom: auto; width: auto; height: 4px; border-radius: 2px; }
-  .season-flags li { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-  .season-flags .flag {
-    width: 100%; max-width: 190px; height: 176px; padding: 26px 8px 0; align-items: flex-start; justify-content: center;
-    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
-    transform-origin: 50% 0;
-  }
-  .season-flags .cap { max-width: 16ch; }
-}
-
 /* --------------------------------------------------------------- pray connect act */
 .steps { counter-reset: none; }
 .step { text-align: center; padding-top: 44px; }
@@ -693,11 +663,6 @@ em { font-style: italic; }
 
 @media (prefers-reduced-motion: no-preference) {
   .tc-flag { animation: tc-sway 5.6s ease-in-out infinite alternate; }
-  .season-flags .flag { animation: tc-sway-sm 6.4s ease-in-out infinite alternate; }
-  .season-flags li:nth-child(2) .flag { animation-delay: -1.2s; }
-  .season-flags li:nth-child(3) .flag { animation-delay: -2.6s; }
-  .season-flags li:nth-child(4) .flag { animation-delay: -3.7s; }
-  .season-flags li:nth-child(5) .flag { animation-delay: -5s; }
   .tc-rays, .tc-sunrays, .tc-burst { transform-box: fill-box; transform-origin: center; animation: tc-spin 90s linear infinite; }
   .tc-burst { animation-duration: 160s; }
   .scoreboard-crest .tc-rays { animation-duration: 60s; }
